@@ -71,7 +71,7 @@ pub fn solve_day_2_part_2(input: &String) -> Result<u64, String> {
             "forward" => {
                 horizontal_position += amount;
                 depth += aim * amount;
-            },
+            }
             "up" => aim -= amount,
             "down" => aim += amount,
             _ => unreachable!(),
