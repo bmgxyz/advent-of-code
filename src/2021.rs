@@ -40,6 +40,46 @@ pub fn solve_day_1_part_2(input: &String) -> Result<u64, String> {
     Ok(increase_count)
 }
 
+pub fn solve_day_2_part_1(input: &String) -> Result<u64, String> {
+    let mut horizontal_position = 0;
+    let mut depth = 0;
+    for line in input.lines() {
+        let (direction, amount) = {
+            let s: Vec<&str> = line.split(' ').collect();
+            (s[0], s[1].parse::<u64>().unwrap())
+        };
+        match direction {
+            "forward" => horizontal_position += amount,
+            "up" => depth -= amount,
+            "down" => depth += amount,
+            _ => unreachable!(),
+        };
+    }
+    Ok(horizontal_position * depth)
+}
+
+pub fn solve_day_2_part_2(input: &String) -> Result<u64, String> {
+    let mut aim = 0;
+    let mut depth = 0;
+    let mut horizontal_position = 0;
+    for line in input.lines() {
+        let (direction, amount) = {
+            let s: Vec<&str> = line.split(' ').collect();
+            (s[0], s[1].parse::<u64>().unwrap())
+        };
+        match direction {
+            "forward" => {
+                horizontal_position += amount;
+                depth += aim * amount;
+            },
+            "up" => aim -= amount,
+            "down" => aim += amount,
+            _ => unreachable!(),
+        };
+    }
+    Ok(horizontal_position * depth)
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -64,5 +104,22 @@ mod test {
     #[test]
     fn day_1_part_2() {
         check_solution(&DAY_1_SAMPLE_INPUT.to_string(), 5, &solve_day_1_part_2);
+    }
+
+    const DAY_2_SAMPLE_INPUT: &str = "forward 5\n\
+        down 5\n\
+        forward 8\n\
+        up 3\n\
+        down 8\n\
+        forward 2\n";
+
+    #[test]
+    fn day_2_part_1() {
+        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 150, &solve_day_2_part_1);
+    }
+
+    #[test]
+    fn day_2_part_2() {
+        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 900, &solve_day_2_part_2);
     }
 }

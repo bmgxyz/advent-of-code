@@ -98,6 +98,8 @@ fn main() -> Result<(), String> {
         2021 => match (day, part) {
             (1, 1) => solve_2021::solve_day_1_part_1(&input),
             (1, 2) => solve_2021::solve_day_1_part_2(&input),
+            (2, 1) => solve_2021::solve_day_2_part_1(&input),
+            (2, 2) => solve_2021::solve_day_2_part_2(&input),
             (d, p) => not_solved_yet(2021, d, p),
         },
         _ => unreachable!(),
