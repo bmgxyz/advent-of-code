@@ -40,7 +40,7 @@ fn main() -> Result<(), String> {
 
     // convert YEAR, DAY, and PART to numbers and check bounds
     let year = match matches.value_of(YEAR).unwrap().to_string().parse::<u16>() {
-        Ok(y) if y >= 2015 && y <= 2021 => y,
+        Ok(y) if (2015..=2021).contains(&y) => y,
         Ok(y) => {
             return Err(format!(
                 "YEAR must be between 2015 and 2021, inclusive (got '{}')",
@@ -50,7 +50,7 @@ fn main() -> Result<(), String> {
         Err(e) => return Err(format!("Failed to parse YEAR: {}", e)),
     };
     let day = match matches.value_of(DAY).unwrap().to_string().parse::<u8>() {
-        Ok(d) if d >= 1 && d <= 25 => d,
+        Ok(d) if (1..=25).contains(&d) => d,
         Ok(d) => {
             return Err(format!(
                 "DAY must be between 2015 and 2021, inclusive (got '{}')",
@@ -73,26 +73,18 @@ fn main() -> Result<(), String> {
 
     // pass the puzzle input to the solution function
     let solution = match year {
-        2015 => match (day, part) {
-            (d, p) => not_solved_yet(2015, d, p),
-        },
-        2016 => match (day, part) {
-            (d, p) => not_solved_yet(2016, d, p),
-        },
-        2017 => match (day, part) {
-            (d, p) => not_solved_yet(2017, d, p),
-        },
-        2018 => match (day, part) {
-            (d, p) => not_solved_yet(2018, d, p),
-        },
-        2019 => match (day, part) {
-            (d, p) => not_solved_yet(2019, d, p),
-        },
+        2015 => not_solved_yet(2015, day, part),
+        2016 => not_solved_yet(2016, day, part),
+        2017 => not_solved_yet(2017, day, part),
+        2018 => not_solved_yet(2018, day, part),
+        2019 => not_solved_yet(2019, day, part),
         2020 => match (day, part) {
             (1, 1) => solve_2020::solve_day_1_part_1(&input),
             (1, 2) => solve_2020::solve_day_1_part_2(&input),
             (2, 1) => solve_2020::solve_day_2_part_1(&input),
             (2, 2) => solve_2020::solve_day_2_part_2(&input),
+            (3, 1) => solve_2020::solve_day_3_part_1(&input),
+            (3, 2) => solve_2020::solve_day_3_part_2(&input),
             (d, p) => not_solved_yet(2020, d, p),
         },
         2021 => match (day, part) {
@@ -111,6 +103,6 @@ fn main() -> Result<(), String> {
             println!("{}", s);
             Ok(())
         }
-        Err(e) => return Err(e),
+        Err(e) => Err(e),
     }
 }

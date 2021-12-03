@@ -1,6 +1,6 @@
 mod util;
 
-pub fn solve_day_1_part_1(input: &String) -> Result<u64, String> {
+pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
     let depths = util::parse_u64(input);
     if depths.len() < 2 {
         return Err(format!(
@@ -19,7 +19,7 @@ pub fn solve_day_1_part_1(input: &String) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_1_part_2(input: &String) -> Result<u64, String> {
+pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
     let depths = util::parse_u64(input);
     if depths.len() < 4 {
         return Err(format!(
@@ -40,7 +40,7 @@ pub fn solve_day_1_part_2(input: &String) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_2_part_1(input: &String) -> Result<u64, String> {
+pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
     let mut horizontal_position = 0;
     let mut depth = 0;
     for line in input.lines() {
@@ -58,7 +58,7 @@ pub fn solve_day_2_part_1(input: &String) -> Result<u64, String> {
     Ok(horizontal_position * depth)
 }
 
-pub fn solve_day_2_part_2(input: &String) -> Result<u64, String> {
+pub fn solve_day_2_part_2(input: &str) -> Result<u64, String> {
     let mut aim = 0;
     let mut depth = 0;
     let mut horizontal_position = 0;

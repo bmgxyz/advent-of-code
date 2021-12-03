@@ -2,7 +2,7 @@ use regex::Regex;
 
 mod util;
 
-pub fn solve_day_1_part_1(input: &String) -> Result<u64, String> {
+pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
     let values = util::parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
@@ -14,7 +14,7 @@ pub fn solve_day_1_part_1(input: &String) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_1_part_2(input: &String) -> Result<u64, String> {
+pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
     let values = util::parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
@@ -28,7 +28,7 @@ pub fn solve_day_1_part_2(input: &String) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_2_part_1(input: &String) -> Result<u64, String> {
+pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<lower>\d+)-(?P<upper>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -55,7 +55,7 @@ pub fn solve_day_2_part_1(input: &String) -> Result<u64, String> {
     Ok(valid_count)
 }
 
-pub fn solve_day_2_part_2(input: &String) -> Result<u64, String> {
+pub fn solve_day_2_part_2(input: &str) -> Result<u64, String> {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<pos1>\d+)-(?P<pos2>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -79,6 +79,40 @@ pub fn solve_day_2_part_2(input: &String) -> Result<u64, String> {
         }
     }
     Ok(valid_count)
+}
+
+fn parse_trees(input: &str) -> Vec<Vec<bool>> {
+    input
+        .lines()
+        .map(|line| line.chars().map(|ch| ch == '#').collect())
+        .collect()
+}
+
+fn count_trees(trees: &[Vec<bool>], rise: u8, run: u8) -> u64 {
+    let (mut x, mut y) = (0, 0);
+    let mut num_trees = 0;
+    while y < trees.len() {
+        if trees[y][x] {
+            num_trees += 1;
+        }
+        x += run as usize;
+        x %= trees[0].len();
+        y += rise as usize;
+    }
+    num_trees
+}
+
+pub fn solve_day_3_part_1(input: &str) -> Result<u64, String> {
+    Ok(count_trees(&parse_trees(input), 1, 3))
+}
+
+pub fn solve_day_3_part_2(input: &str) -> Result<u64, String> {
+    let trees = parse_trees(input);
+    Ok(count_trees(&trees, 1, 1)
+        * count_trees(&trees, 1, 3)
+        * count_trees(&trees, 1, 5)
+        * count_trees(&trees, 1, 7)
+        * count_trees(&trees, 2, 1))
 }
 
 #[cfg(test)]
@@ -119,5 +153,27 @@ mod test {
     #[test]
     fn day_2_part_2() {
         check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 1, &solve_day_2_part_2);
+    }
+
+    const DAY_3_SAMPLE_INPUT: &str = "..##.......\n\
+        #...#...#..\n\
+        .#....#..#.\n\
+        ..#.#...#.#\n\
+        .#...##..#.\n\
+        ..#.##.....\n\
+        .#.#.#....#\n\
+        .#........#\n\
+        #.##...#...\n\
+        #...##....#\n\
+        .#..#...#.#\n";
+
+    #[test]
+    fn day_3_part_1() {
+        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 7, &solve_day_3_part_1);
+    }
+
+    #[test]
+    fn day_3_part_2() {
+        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 336, &solve_day_3_part_2);
     }
 }
