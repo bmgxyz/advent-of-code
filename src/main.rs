@@ -85,6 +85,7 @@ fn main() -> Result<(), String> {
             (2, 2) => solve_2020::solve_day_2_part_2(&input),
             (3, 1) => solve_2020::solve_day_3_part_1(&input),
             (3, 2) => solve_2020::solve_day_3_part_2(&input),
+            (25, 1) => solve_2020::solve_day_25_part_1(&input),
             (d, p) => not_solved_yet(2020, d, p),
         },
         2021 => match (day, part) {
