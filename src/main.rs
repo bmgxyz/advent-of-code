@@ -1,6 +1,9 @@
 use clap::{App, Arg};
 use std::fs;
 
+#[path = "2015.rs"]
+mod solve_2015;
+
 #[path = "2020.rs"]
 mod solve_2020;
 
@@ -73,7 +76,11 @@ fn main() -> Result<(), String> {
 
     // pass the puzzle input to the solution function
     let solution = match year {
-        2015 => not_solved_yet(2015, day, part),
+        2015 => match (day, part) {
+            (1, 1) => solve_2015::solve_day_1_part_1(&input),
+            (1, 2) => solve_2015::solve_day_1_part_2(&input),
+            (d, p) => not_solved_yet(2015, d, p),
+        },
         2016 => not_solved_yet(2016, day, part),
         2017 => not_solved_yet(2017, day, part),
         2018 => not_solved_yet(2018, day, part),
@@ -93,6 +100,8 @@ fn main() -> Result<(), String> {
             (1, 2) => solve_2021::solve_day_1_part_2(&input),
             (2, 1) => solve_2021::solve_day_2_part_1(&input),
             (2, 2) => solve_2021::solve_day_2_part_2(&input),
+            (3, 1) => solve_2021::solve_day_3_part_1(&input),
+            (3, 2) => solve_2021::solve_day_3_part_2(&input),
             (d, p) => not_solved_yet(2021, d, p),
         },
         _ => unreachable!(),
