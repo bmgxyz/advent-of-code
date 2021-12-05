@@ -2,7 +2,7 @@ use regex::Regex;
 
 mod util;
 
-pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     let values = util::parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
@@ -14,7 +14,7 @@ pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
     let values = util::parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
@@ -28,7 +28,7 @@ pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<lower>\d+)-(?P<upper>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -55,7 +55,7 @@ pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
     Ok(valid_count)
 }
 
-pub fn solve_day_2_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<pos1>\d+)-(?P<pos2>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -102,11 +102,11 @@ fn count_trees(trees: &[Vec<bool>], rise: u8, run: u8) -> u64 {
     num_trees
 }
 
-pub fn solve_day_3_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
     Ok(count_trees(&parse_trees(input), 1, 3))
 }
 
-pub fn solve_day_3_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
     let trees = parse_trees(input);
     Ok(count_trees(&trees, 1, 1)
         * count_trees(&trees, 1, 3)
@@ -159,7 +159,7 @@ mod test {
     use super::*;
     use util::check_solution;
 
-    const DAY_1_SAMPLE_INPUT: &str = "1721\n\
+    const DAY_01_SAMPLE_INPUT: &str = "1721\n\
         979\n\
         366\n\
         299\n\
@@ -167,34 +167,34 @@ mod test {
         1456\n";
 
     #[test]
-    fn day_1_part_1() {
-        check_solution(&DAY_1_SAMPLE_INPUT.to_string(), 514579, &solve_day_1_part_1);
+    fn day_01_part_1() {
+        check_solution(&DAY_01_SAMPLE_INPUT.to_string(), 514579, &solve_day_01_part_1);
     }
 
     #[test]
-    fn day_1_part_2() {
+    fn day_01_part_2() {
         check_solution(
-            &DAY_1_SAMPLE_INPUT.to_string(),
+            &DAY_01_SAMPLE_INPUT.to_string(),
             241861950,
-            &solve_day_1_part_2,
+            &solve_day_01_part_2,
         );
     }
 
-    const DAY_2_SAMPLE_INPUT: &str = "1-3 a: abcde\n\
+    const DAY_02_SAMPLE_INPUT: &str = "1-3 a: abcde\n\
         1-3 b: cdefg\n\
         2-9 c: ccccccccc\n";
 
     #[test]
-    fn day_2_part_1() {
-        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 2, &solve_day_2_part_1);
+    fn day_02_part_1() {
+        check_solution(&DAY_02_SAMPLE_INPUT.to_string(), 2, &solve_day_02_part_1);
     }
 
     #[test]
-    fn day_2_part_2() {
-        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 1, &solve_day_2_part_2);
+    fn day_02_part_2() {
+        check_solution(&DAY_02_SAMPLE_INPUT.to_string(), 1, &solve_day_02_part_2);
     }
 
-    const DAY_3_SAMPLE_INPUT: &str = "..##.......\n\
+    const DAY_03_SAMPLE_INPUT: &str = "..##.......\n\
         #...#...#..\n\
         .#....#..#.\n\
         ..#.#...#.#\n\
@@ -207,13 +207,13 @@ mod test {
         .#..#...#.#\n";
 
     #[test]
-    fn day_3_part_1() {
-        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 7, &solve_day_3_part_1);
+    fn day_03_part_1() {
+        check_solution(&DAY_03_SAMPLE_INPUT.to_string(), 7, &solve_day_03_part_1);
     }
 
     #[test]
-    fn day_3_part_2() {
-        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 336, &solve_day_3_part_2);
+    fn day_03_part_2() {
+        check_solution(&DAY_03_SAMPLE_INPUT.to_string(), 336, &solve_day_03_part_2);
     }
 
     #[test]

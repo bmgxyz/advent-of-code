@@ -1,6 +1,6 @@
 mod util;
 
-pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     let depths = util::parse_u64(input);
     if depths.len() < 2 {
         return Err(format!(
@@ -19,7 +19,7 @@ pub fn solve_day_1_part_1(input: &str) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
     let depths = util::parse_u64(input);
     if depths.len() < 4 {
         return Err(format!(
@@ -40,7 +40,7 @@ pub fn solve_day_1_part_2(input: &str) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     let mut horizontal_position = 0;
     let mut depth = 0;
     for line in input.lines() {
@@ -58,7 +58,7 @@ pub fn solve_day_2_part_1(input: &str) -> Result<u64, String> {
     Ok(horizontal_position * depth)
 }
 
-pub fn solve_day_2_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
     let mut aim = 0;
     let mut depth = 0;
     let mut horizontal_position = 0;
@@ -80,7 +80,7 @@ pub fn solve_day_2_part_2(input: &str) -> Result<u64, String> {
     Ok(horizontal_position * depth)
 }
 
-pub fn solve_day_3_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
     let length = input.lines().next().unwrap().len();
     let mut bit_counts = vec![0; length];
     for line in input.lines() {
@@ -152,7 +152,7 @@ fn filter_numbers(numbers: &[&str], gas: Gas) -> String {
     remaining_numbers[0].to_string()
 }
 
-pub fn solve_day_3_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
     let remaining_numbers: Vec<&str> = input.lines().collect();
     let oxygen_rating = filter_numbers(&remaining_numbers, Gas::Oxygen);
     let carbon_dioxide_rating = filter_numbers(&remaining_numbers, Gas::CarbonDioxide);
@@ -208,7 +208,7 @@ fn compute_score(board: &Board, last_number: u8) -> u64 {
     sum * (last_number as u64)
 }
 
-fn parse_day_4_input(input: &str) -> (Vec<u8>, Vec<Board>) {
+fn parse_day_04_input(input: &str) -> (Vec<u8>, Vec<Board>) {
     let mut lines = input.lines().peekable();
     let numbers: Vec<u8> = lines
         .next()
@@ -237,8 +237,8 @@ fn parse_day_4_input(input: &str) -> (Vec<u8>, Vec<Board>) {
     (numbers, boards)
 }
 
-pub fn solve_day_4_part_1(input: &str) -> Result<u64, String> {
-    let (numbers, mut boards) = parse_day_4_input(input);
+pub fn solve_day_04_part_1(input: &str) -> Result<u64, String> {
+    let (numbers, mut boards) = parse_day_04_input(input);
     for number in numbers.iter() {
         for board in boards.iter_mut() {
             apply_new_number(*number, board);
@@ -250,8 +250,8 @@ pub fn solve_day_4_part_1(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find a winning board"))
 }
 
-pub fn solve_day_4_part_2(input: &str) -> Result<u64, String> {
-    let (numbers, mut boards) = parse_day_4_input(input);
+pub fn solve_day_04_part_2(input: &str) -> Result<u64, String> {
+    let (numbers, mut boards) = parse_day_04_input(input);
     let mut winning_boards = vec![false; boards.len()];
     for number in numbers.iter() {
         for (idx, board) in boards.iter_mut().enumerate() {
@@ -272,7 +272,7 @@ mod test {
     use super::*;
     use util::check_solution;
 
-    const DAY_1_SAMPLE_INPUT: &str = "199\n\
+    const DAY_01_SAMPLE_INPUT: &str = "199\n\
         200\n\
         208\n\
         210\n\
@@ -284,16 +284,16 @@ mod test {
         263\n";
 
     #[test]
-    fn day_1_part_1() {
-        check_solution(&DAY_1_SAMPLE_INPUT.to_string(), 7, &solve_day_1_part_1);
+    fn day_01_part_1() {
+        check_solution(&DAY_01_SAMPLE_INPUT.to_string(), 7, &solve_day_01_part_1);
     }
 
     #[test]
-    fn day_1_part_2() {
-        check_solution(&DAY_1_SAMPLE_INPUT.to_string(), 5, &solve_day_1_part_2);
+    fn day_01_part_2() {
+        check_solution(&DAY_01_SAMPLE_INPUT.to_string(), 5, &solve_day_01_part_2);
     }
 
-    const DAY_2_SAMPLE_INPUT: &str = "forward 5\n\
+    const DAY_02_SAMPLE_INPUT: &str = "forward 5\n\
         down 5\n\
         forward 8\n\
         up 3\n\
@@ -301,16 +301,16 @@ mod test {
         forward 2\n";
 
     #[test]
-    fn day_2_part_1() {
-        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 150, &solve_day_2_part_1);
+    fn day_02_part_1() {
+        check_solution(&DAY_02_SAMPLE_INPUT.to_string(), 150, &solve_day_02_part_1);
     }
 
     #[test]
-    fn day_2_part_2() {
-        check_solution(&DAY_2_SAMPLE_INPUT.to_string(), 900, &solve_day_2_part_2);
+    fn day_02_part_2() {
+        check_solution(&DAY_02_SAMPLE_INPUT.to_string(), 900, &solve_day_02_part_2);
     }
 
-    const DAY_3_SAMPLE_INPUT: &str = "00100\n\
+    const DAY_03_SAMPLE_INPUT: &str = "00100\n\
         11110\n\
         10110\n\
         10111\n\
@@ -324,16 +324,16 @@ mod test {
         01010\n";
 
     #[test]
-    fn day_3_part_1() {
-        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 198, &solve_day_3_part_1);
+    fn day_03_part_1() {
+        check_solution(&DAY_03_SAMPLE_INPUT.to_string(), 198, &solve_day_03_part_1);
     }
 
     #[test]
-    fn day_3_part_2() {
-        check_solution(&DAY_3_SAMPLE_INPUT.to_string(), 230, &solve_day_3_part_2);
+    fn day_03_part_2() {
+        check_solution(&DAY_03_SAMPLE_INPUT.to_string(), 230, &solve_day_03_part_2);
     }
 
-    const DAY_4_SAMPLE_INPUT: &str =
+    const DAY_04_SAMPLE_INPUT: &str =
         "7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1\n\
         \n\
         22 13 17 11  0\n\
@@ -355,12 +355,12 @@ mod test {
         2  0 12  3  7";
 
     #[test]
-    fn day_4_part_1() {
-        check_solution(&DAY_4_SAMPLE_INPUT.to_string(), 4512, &solve_day_4_part_1);
+    fn day_04_part_1() {
+        check_solution(&DAY_04_SAMPLE_INPUT.to_string(), 4512, &solve_day_04_part_1);
     }
 
     #[test]
-    fn day_4_part_2() {
-        check_solution(&DAY_4_SAMPLE_INPUT.to_string(), 1924, &solve_day_4_part_2);
+    fn day_04_part_2() {
+        check_solution(&DAY_04_SAMPLE_INPUT.to_string(), 1924, &solve_day_04_part_2);
     }
 }
