@@ -168,7 +168,11 @@ mod test {
 
     #[test]
     fn day_01_part_1() {
-        check_solution(&DAY_01_SAMPLE_INPUT.to_string(), 514579, &solve_day_01_part_1);
+        check_solution(
+            &DAY_01_SAMPLE_INPUT.to_string(),
+            514579,
+            &solve_day_01_part_1,
+        );
     }
 
     #[test]
