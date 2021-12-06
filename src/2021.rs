@@ -344,6 +344,39 @@ pub fn solve_day_05_part_2(input: &str) -> Result<u64, String> {
     Ok(visited.values().filter(|v| v >= &&2).count() as u64)
 }
 
+fn simulate_lanternfish(input: &str, days: u16) -> u64 {
+    let initial_lanternfish: Vec<u64> = input
+        .split(',')
+        .map(|f| f.trim_end().parse::<u64>().unwrap())
+        .collect();
+    let mut lanternfish = [0u64; 9];
+    // count the fish in each timer state
+    for fish in initial_lanternfish {
+        lanternfish[fish as usize] += 1;
+    }
+    let mut zero_fish;
+    for _ in 0..days {
+        zero_fish = lanternfish[0];
+        // subtract all fish timers by shifting values left
+        for idx in 0..8 {
+            lanternfish[idx] = lanternfish[idx + 1];
+        }
+        // all the fish that were at zero are now at six
+        lanternfish[6] += zero_fish;
+        // and they reproduce, which results in an equal number of fish at eight
+        lanternfish[8] = zero_fish;
+    }
+    lanternfish.iter().sum::<u64>()
+}
+
+pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
+    Ok(simulate_lanternfish(input, 80))
+}
+
+pub fn solve_day_06_part_2(input: &str) -> Result<u64, String> {
+    Ok(simulate_lanternfish(input, 256))
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -460,7 +493,21 @@ mod test {
     #[test]
     fn day_05_part_2() {
         check_solution(&DAY_05_SAMPLE_INPUT.to_string(), 12, &solve_day_05_part_2);
+        // I found this extra test case helpful
         let second_test = "3,3 -> 4,4\n3,3 -> 4,4";
         check_solution(&second_test.to_string(), 2, &solve_day_05_part_2);
+    }
+
+    const DAY_06_SAMPLE_INPUT: &str = "3,4,3,1,2\n";
+
+    #[test]
+    fn day_06_part_1() {
+        check_solution(&DAY_06_SAMPLE_INPUT, 5934, &solve_day_06_part_1);
+    }
+
+    #[test]
+    fn day_06_part_2() {
+        check_solution(&DAY_06_SAMPLE_INPUT, 26984457539, &solve_day_06_part_2);
+        unimplemented!();
     }
 }
