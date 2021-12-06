@@ -106,6 +106,8 @@ fn main() -> Result<(), String> {
             (3, 2) => solve_2021::solve_day_03_part_2(&input),
             (4, 1) => solve_2021::solve_day_04_part_1(&input),
             (4, 2) => solve_2021::solve_day_04_part_2(&input),
+            (5, 1) => solve_2021::solve_day_05_part_1(&input),
+            (5, 2) => solve_2021::solve_day_05_part_2(&input),
             (d, p) => not_solved_yet(2021, d, p),
         },
         _ => unreachable!(),
