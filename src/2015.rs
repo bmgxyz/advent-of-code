@@ -59,6 +59,58 @@ pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
     Ok(ribbon_total)
 }
 
+pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
+    let mut position = (0, 0);
+    let mut visited = std::collections::HashSet::new();
+    visited.insert((0, 0));
+    for step in input.chars() {
+        match step {
+            '>' => position.0 += 1,
+            '<' => position.0 -= 1,
+            '^' => position.1 += 1,
+            'v' => position.1 -= 1,
+            c => return Err(format!("Found bad character: '{}'", c)),
+        };
+        visited.insert(position);
+    }
+    Ok(visited.len() as u64)
+}
+
+enum Actor {
+    Santa,
+    Robot,
+}
+
+/// This solution is due to Brady Butler (https://github.com/mbbutler).
+pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
+    let mut santa = (0, 0);
+    let mut robot = (0, 0);
+    let mut visited = std::collections::HashSet::new();
+    visited.insert((0, 0));
+    let mut actor: Actor = Actor::Santa;
+    for step in input.chars() {
+        let mut position = match actor {
+            Actor::Santa => {
+                actor = Actor::Robot;
+                &mut santa
+            }
+            Actor::Robot => {
+                actor = Actor::Santa;
+                &mut robot
+            }
+        };
+        match step {
+            '>' => position.0 += 1,
+            '<' => position.0 -= 1,
+            '^' => position.1 += 1,
+            'v' => position.1 -= 1,
+            c => return Err(format!("Found bad character: '{}'", c)),
+        };
+        visited.insert(*position);
+    }
+    Ok(visited.len() as u64)
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -89,5 +141,18 @@ mod test {
     #[test]
     fn day_02_part_2() {
         check_solution(&DAY_02_SAMPLE_INPUT, 48, &solve_day_02_part_2);
+    }
+
+    #[test]
+    fn day_03_part_1() {
+        check_solution(">", 2, &solve_day_03_part_1);
+        check_solution("^>v<", 4, &solve_day_03_part_1);
+        check_solution("^v^v^v^v^v", 2, &solve_day_03_part_1);
+    }
+
+    #[test]
+    fn day_03_part_2() {
+        // check_solution(input, output, solution);
+        unimplemented!();
     }
 }
