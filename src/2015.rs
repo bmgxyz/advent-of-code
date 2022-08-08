@@ -111,6 +111,37 @@ pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
     Ok(visited.len() as u64)
 }
 
+pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
+    let mut nice_count = 0;
+    for line in input.lines() {
+        if line.contains("ab") || line.contains("cd") || line.contains("pq") || line.contains("xy")
+        {
+            continue;
+        }
+
+        let vowel_count = line
+            .chars()
+            .filter(|c| *c == 'a' || *c == 'e' || *c == 'i' || *c == 'o' || *c == 'u')
+            .count();
+        if vowel_count < 3 {
+            continue;
+        }
+
+        // Compare character pairs.
+        let mut chars_iter = line.chars();
+        while let Some(chr) = chars_iter.next() {
+            let maybe_next_chr = chars_iter.next();
+            if let Some(next_chr) = maybe_next_chr {
+                if chr == next_chr {
+                    nice_count += 1;
+                    continue;
+                }
+            }
+        }
+    }
+    Ok(nice_count)
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -155,4 +186,13 @@ mod test {
     //     // check_solution(input, output, solution);
     //     unimplemented!();
     // }
+
+    #[test]
+    fn day_05_part_1() {
+        check_solution("ugknbfddgicrmopn\n", 1, &solve_day_05_part_1);
+        check_solution("aaa\n", 1, &solve_day_05_part_1);
+        check_solution("jchzalrnumimnmhp\n", 0, &solve_day_05_part_1);
+        check_solution("haegwjzuvuyypxyu\n", 0, &solve_day_05_part_1);
+        check_solution("dvszwmarrgswjxmb\n", 0, &solve_day_05_part_1);
+    }
 }
