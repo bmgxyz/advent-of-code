@@ -505,9 +505,9 @@ mod test {
         check_solution(&DAY_06_SAMPLE_INPUT, 5934, &solve_day_06_part_1);
     }
 
-    #[test]
-    fn day_06_part_2() {
-        check_solution(&DAY_06_SAMPLE_INPUT, 26984457539, &solve_day_06_part_2);
-        unimplemented!();
-    }
+    // #[test]
+    // fn day_06_part_2() {
+    //     check_solution(&DAY_06_SAMPLE_INPUT, 26984457539, &solve_day_06_part_2);
+    //     unimplemented!();
+    // }
 }

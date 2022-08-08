@@ -150,9 +150,9 @@ mod test {
         check_solution("^v^v^v^v^v", 2, &solve_day_03_part_1);
     }
 
-    #[test]
-    fn day_03_part_2() {
-        // check_solution(input, output, solution);
-        unimplemented!();
-    }
+    // #[test]
+    // fn day_03_part_2() {
+    //     // check_solution(input, output, solution);
+    //     unimplemented!();
+    // }
 }
