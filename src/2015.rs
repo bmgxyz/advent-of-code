@@ -1,3 +1,5 @@
+use regex::Regex;
+
 mod util;
 
 pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
@@ -142,6 +144,54 @@ pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
     Ok(nice_count)
 }
 
+pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
+    let re = Regex::new(r"(turn on|toggle|turn off) (\d+),(\d+) through (\d+),(\d+)").unwrap();
+    let mut lights = vec![vec![false; 1000]; 1000];
+    for line in input.lines() {
+        let caps = re.captures(line).unwrap();
+        let (action, x1, y1, x2, y2) = (
+            &caps[1],
+            caps[2].parse::<usize>().unwrap(),
+            caps[3].parse::<usize>().unwrap(),
+            caps[4].parse::<usize>().unwrap(),
+            caps[5].parse::<usize>().unwrap(),
+        );
+        match action {
+            "turn on" => {
+                for row in y1..=y2 {
+                    for col in x1..=x2 {
+                        lights[row][col] = true;
+                    }
+                }
+            }
+            "toggle" => {
+                for row in y1..=y2 {
+                    for col in x1..=x2 {
+                        lights[row][col] = !lights[row][col];
+                    }
+                }
+            }
+            "turn off" => {
+                for row in y1..=y2 {
+                    for col in x1..=x2 {
+                        lights[row][col] = false;
+                    }
+                }
+            }
+            _ => unreachable!(),
+        };
+    }
+    let mut enabled_lights = 0;
+    for row in lights {
+        for light in row {
+            if light {
+                enabled_lights += 1;
+            }
+        }
+    }
+    Ok(enabled_lights)
+}
+
 #[cfg(test)]
 mod test {
     use super::*;
@@ -194,5 +244,24 @@ mod test {
         check_solution("jchzalrnumimnmhp\n", 0, &solve_day_05_part_1);
         check_solution("haegwjzuvuyypxyu\n", 0, &solve_day_05_part_1);
         check_solution("dvszwmarrgswjxmb\n", 0, &solve_day_05_part_1);
+    }
+
+    #[test]
+    fn day_06_part_1() {
+        check_solution(
+            "turn on 0,0 through 999,999\n",
+            1_000_000,
+            &solve_day_06_part_1,
+        );
+        check_solution(
+            "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0",
+            999_000,
+            &solve_day_06_part_1,
+        );
+        check_solution(
+            "turn on 0,0 through 999,999\nturn off 499,499 through 500,500",
+            999_996,
+            &solve_day_06_part_1,
+        );
     }
 }
