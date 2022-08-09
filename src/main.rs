@@ -86,6 +86,7 @@ fn main() -> Result<(), String> {
             (5, 1) => solve_2015::solve_day_05_part_1(&input), // unverified
             (6, 1) => solve_2015::solve_day_06_part_1(&input), // unverified
             (10, 1) => solve_2015::solve_day_10_part_1(&input), // unverified
+            (12, 1) => solve_2015::solve_day_12_part_1(&input), // unverified
             (d, p) => not_solved_yet(2015, d, p),
         },
         2016 => not_solved_yet(2016, day, part),
