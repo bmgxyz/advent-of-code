@@ -115,7 +115,7 @@ pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
 
 pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
     let mut nice_count = 0;
-    for line in input.lines() {
+    'lines: for line in input.lines() {
         if line.contains("ab") || line.contains("cd") || line.contains("pq") || line.contains("xy")
         {
             continue;
@@ -131,14 +131,13 @@ pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
 
         // Compare character pairs.
         let mut chars_iter = line.chars();
+        let mut prev_chr = chars_iter.next().unwrap();
         while let Some(chr) = chars_iter.next() {
-            let maybe_next_chr = chars_iter.next();
-            if let Some(next_chr) = maybe_next_chr {
-                if chr == next_chr {
-                    nice_count += 1;
-                    continue;
-                }
+            if prev_chr == chr {
+                nice_count += 1;
+                continue 'lines;
             }
+            prev_chr = chr;
         }
     }
     Ok(nice_count)
