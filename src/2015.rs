@@ -132,7 +132,7 @@ pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
         // Compare character pairs.
         let mut chars_iter = line.chars();
         let mut prev_chr = chars_iter.next().unwrap();
-        while let Some(chr) = chars_iter.next() {
+        for chr in chars_iter {
             if prev_chr == chr {
                 nice_count += 1;
                 continue 'lines;
@@ -155,6 +155,9 @@ pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
             caps[4].parse::<usize>().unwrap(),
             caps[5].parse::<usize>().unwrap(),
         );
+        // I think it's more clear to explicitly index into lights rather than
+        // construct an iterator over it.
+        #[allow(clippy::needless_range_loop)]
         match action {
             "turn on" => {
                 for row in y1..=y2 {

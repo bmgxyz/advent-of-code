@@ -56,7 +56,7 @@ fn main() -> Result<(), String> {
         Ok(d) if (1..=25).contains(&d) => d,
         Ok(d) => {
             return Err(format!(
-                "DAY must be between 2015 and 2021, inclusive (got '{}')",
+                "DAY must be between 1 and 25, inclusive (got '{}')",
                 d
             ))
         }
