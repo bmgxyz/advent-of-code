@@ -10,6 +10,9 @@ mod solve_2020;
 #[path = "2021.rs"]
 mod solve_2021;
 
+#[path = "2022.rs"]
+mod solve_2022;
+
 mod util;
 use util::not_solved_yet;
 
@@ -25,7 +28,7 @@ fn main() -> Result<(), String> {
         .author("Bradley Gannon <bradley@bradleygannon.com>")
         .arg(
             Arg::with_name(YEAR)
-                .help("Must be between 2015 and 2021, inclusive")
+                .help("Must be between 2015 and 2022, inclusive")
                 .required(true),
         )
         .arg(
@@ -43,10 +46,10 @@ fn main() -> Result<(), String> {
 
     // convert YEAR, DAY, and PART to numbers and check bounds
     let year = match matches.value_of(YEAR).unwrap().to_string().parse::<u16>() {
-        Ok(y) if (2015..=2021).contains(&y) => y,
+        Ok(y) if (2015..=2022).contains(&y) => y,
         Ok(y) => {
             return Err(format!(
-                "YEAR must be between 2015 and 2021, inclusive (got '{}')",
+                "YEAR must be between 2015 and 2022, inclusive (got '{}')",
                 y
             ))
         }
@@ -121,6 +124,9 @@ fn main() -> Result<(), String> {
             (6, 1) => solve_2021::solve_day_06_part_1(&input),
             (6, 2) => solve_2021::solve_day_06_part_2(&input),
             (d, p) => not_solved_yet(2021, d, p),
+        },
+        2022 => match (day, part) {
+            (d, p) => not_solved_yet(2022, d, p),
         },
         _ => unreachable!(),
     };
