@@ -126,6 +126,8 @@ fn main() -> Result<(), String> {
             (d, p) => not_solved_yet(2021, d, p),
         },
         2022 => match (day, part) {
+            (1, 1) => solve_2022::solve_day_01_part_1(&input),
+            (1, 2) => solve_2022::solve_day_01_part_2(&input),
             (d, p) => not_solved_yet(2022, d, p),
         },
         _ => unreachable!(),
