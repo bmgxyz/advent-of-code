@@ -2,8 +2,6 @@ use std::num::Wrapping;
 
 use regex::Regex;
 
-mod util;
-
 pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     let mut floor: i64 = 0;
     for ch in input.chars() {
@@ -423,7 +421,7 @@ pub fn solve_day_25_part_1(input: &str) -> Result<u64, String> {
 #[cfg(test)]
 mod test {
     use super::*;
-    use util::check_solution;
+    use crate::util::check_solution;
 
     #[test]
     fn day_01_part_1() {

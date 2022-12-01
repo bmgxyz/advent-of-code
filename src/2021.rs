@@ -1,7 +1,7 @@
 use regex::Regex;
 use std::collections::HashMap;
 
-mod util;
+use crate::util;
 
 pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     let depths = util::parse_u64(input);
