@@ -1,3 +1,5 @@
+use crate::util::AdventResult;
+
 fn parse_elf_calories(input: &str) -> Result<Vec<u64>, String> {
     let mut elf_calories = Vec::new();
     let mut current_total = 0;
@@ -19,7 +21,7 @@ fn parse_elf_calories(input: &str) -> Result<Vec<u64>, String> {
     Ok(elf_calories)
 }
 
-pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_1(input: &str) -> AdventResult {
     let elf_calories = parse_elf_calories(input)?;
     match elf_calories.iter().max() {
         Some(m) => Ok(*m),
@@ -27,7 +29,7 @@ pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     }
 }
 
-pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_2(input: &str) -> AdventResult {
     let mut elf_calories = parse_elf_calories(input)?;
     elf_calories.sort();
     if elf_calories.len() >= 3 {
@@ -68,7 +70,7 @@ fn compute_rps_score(rounds: Vec<(RpsChoice, RpsChoice)>) -> u64 {
     score
 }
 
-pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> AdventResult {
     let mut guide = Vec::new();
     for line in input.lines() {
         if line.len() >= 3 {
@@ -90,7 +92,7 @@ pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     Ok(compute_rps_score(guide))
 }
 
-pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> AdventResult {
     let mut guide = Vec::new();
     for line in input.lines() {
         if line.len() >= 3 {

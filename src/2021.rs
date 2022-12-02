@@ -1,10 +1,10 @@
 use regex::Regex;
 use std::collections::HashMap;
 
-use crate::util;
+use crate::util::{parse_u64, AdventResult};
 
-pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
-    let depths = util::parse_u64(input);
+pub fn solve_day_01_part_1(input: &str) -> AdventResult {
+    let depths = parse_u64(input);
     if depths.len() < 2 {
         return Err(format!(
             "Not enough depth measurements: found {}",
@@ -22,8 +22,8 @@ pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
-    let depths = util::parse_u64(input);
+pub fn solve_day_01_part_2(input: &str) -> AdventResult {
+    let depths = parse_u64(input);
     if depths.len() < 4 {
         return Err(format!(
             "Not enough depth measurements: found {}",
@@ -43,7 +43,7 @@ pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
     Ok(increase_count)
 }
 
-pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> AdventResult {
     let mut horizontal_position = 0;
     let mut depth = 0;
     for line in input.lines() {
@@ -61,7 +61,7 @@ pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     Ok(horizontal_position * depth)
 }
 
-pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> AdventResult {
     let mut aim = 0;
     let mut depth = 0;
     let mut horizontal_position = 0;
@@ -83,7 +83,7 @@ pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
     Ok(horizontal_position * depth)
 }
 
-pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_1(input: &str) -> AdventResult {
     let length = input.lines().next().unwrap().len();
     let mut bit_counts = vec![0; length];
     for line in input.lines() {
@@ -155,7 +155,7 @@ fn filter_numbers(numbers: &[&str], gas: Gas) -> String {
     remaining_numbers[0].to_string()
 }
 
-pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_2(input: &str) -> AdventResult {
     let remaining_numbers: Vec<&str> = input.lines().collect();
     let oxygen_rating = filter_numbers(&remaining_numbers, Gas::Oxygen);
     let carbon_dioxide_rating = filter_numbers(&remaining_numbers, Gas::CarbonDioxide);
@@ -240,7 +240,7 @@ fn parse_day_04_input(input: &str) -> (Vec<u8>, Vec<Board>) {
     (numbers, boards)
 }
 
-pub fn solve_day_04_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_04_part_1(input: &str) -> AdventResult {
     let (numbers, mut boards) = parse_day_04_input(input);
     for number in numbers.iter() {
         for board in boards.iter_mut() {
@@ -253,7 +253,7 @@ pub fn solve_day_04_part_1(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find a winning board"))
 }
 
-pub fn solve_day_04_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_04_part_2(input: &str) -> AdventResult {
     let (numbers, mut boards) = parse_day_04_input(input);
     let mut winning_boards = vec![false; boards.len()];
     for number in numbers.iter() {
@@ -296,7 +296,7 @@ fn increment_visited(visited: &mut HashMap<(u16, u16), u32>, point: (u16, u16)) 
     };
 }
 
-pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_05_part_1(input: &str) -> AdventResult {
     let mut visited: HashMap<(u16, u16), u32> = HashMap::new();
     for (x1, y1, x2, y2) in parse_day_05_input(input) {
         if x1 == x2 {
@@ -312,7 +312,7 @@ pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
     Ok(visited.values().filter(|v| v >= &&2).count() as u64)
 }
 
-pub fn solve_day_05_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_05_part_2(input: &str) -> AdventResult {
     let mut visited: HashMap<(u16, u16), u32> = HashMap::new();
     for (x1, y1, x2, y2) in parse_day_05_input(input) {
         if x1 == x2 {
@@ -369,18 +369,18 @@ fn simulate_lanternfish(input: &str, days: u16) -> u64 {
     lanternfish.iter().sum::<u64>()
 }
 
-pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_06_part_1(input: &str) -> AdventResult {
     Ok(simulate_lanternfish(input, 80))
 }
 
-pub fn solve_day_06_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_06_part_2(input: &str) -> AdventResult {
     Ok(simulate_lanternfish(input, 256))
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    use util::check_solution;
+    use crate::util::check_solution;
 
     const DAY_01_SAMPLE_INPUT: &str = "199\n\
         200\n\

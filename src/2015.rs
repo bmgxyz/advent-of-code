@@ -2,7 +2,9 @@ use std::num::Wrapping;
 
 use regex::Regex;
 
-pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
+use crate::util::AdventResult;
+
+pub fn solve_day_01_part_1(input: &str) -> AdventResult {
     let mut floor: i64 = 0;
     for ch in input.chars() {
         if ch == '(' {
@@ -14,7 +16,7 @@ pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     Ok(floor as u64)
 }
 
-pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_01_part_2(input: &str) -> AdventResult {
     let mut floor = 0;
     for (idx, ch) in input.chars().enumerate() {
         if ch == '(' {
@@ -40,7 +42,7 @@ fn parse_day_02_input(input: &str) -> Vec<Vec<u64>> {
         .collect()
 }
 
-pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> AdventResult {
     let mut dimensions = parse_day_02_input(input);
     let mut paper_total = 0;
     for dim in dimensions.iter_mut() {
@@ -51,7 +53,7 @@ pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     Ok(paper_total)
 }
 
-pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> AdventResult {
     let mut dimensions = parse_day_02_input(input);
     let mut ribbon_total = 0;
     for dim in dimensions.iter_mut() {
@@ -61,7 +63,7 @@ pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
     Ok(ribbon_total)
 }
 
-pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_1(input: &str) -> AdventResult {
     let mut position = (0, 0);
     let mut visited = std::collections::HashSet::new();
     visited.insert((0, 0));
@@ -84,7 +86,7 @@ enum Actor {
 }
 
 /// This solution is due to Brady Butler (https://github.com/mbbutler).
-pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_2(input: &str) -> AdventResult {
     let mut santa = (0, 0);
     let mut robot = (0, 0);
     let mut visited = std::collections::HashSet::new();
@@ -196,7 +198,7 @@ fn concat_message(original_message: &[u8], number: u64) -> Vec<u8> {
     new_message
 }
 
-pub fn solve_day_04_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_04_part_1(input: &str) -> AdventResult {
     let mut number = 0;
     let original_message = input.as_bytes();
     // Run until the first 20 bits are zero.
@@ -206,7 +208,7 @@ pub fn solve_day_04_part_1(input: &str) -> Result<u64, String> {
     Ok(number)
 }
 
-pub fn solve_day_04_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_04_part_2(input: &str) -> AdventResult {
     let mut number = 0;
     let original_message = input.as_bytes();
     // Run until the first 24 bits are zero.
@@ -216,7 +218,7 @@ pub fn solve_day_04_part_2(input: &str) -> Result<u64, String> {
     Ok(number)
 }
 
-pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_05_part_1(input: &str) -> AdventResult {
     let mut nice_count = 0;
     'lines: for line in input.lines() {
         if line.contains("ab") || line.contains("cd") || line.contains("pq") || line.contains("xy")
@@ -246,7 +248,7 @@ pub fn solve_day_05_part_1(input: &str) -> Result<u64, String> {
     Ok(nice_count)
 }
 
-pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_06_part_1(input: &str) -> AdventResult {
     let re = Regex::new(r"(turn on|toggle|turn off) (\d+),(\d+) through (\d+),(\d+)").unwrap();
     let mut lights = vec![vec![false; 1000]; 1000];
     for line in input.lines() {
@@ -297,7 +299,7 @@ pub fn solve_day_06_part_1(input: &str) -> Result<u64, String> {
     Ok(enabled_lights)
 }
 
-pub fn solve_day_06_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_06_part_2(input: &str) -> AdventResult {
     let re = Regex::new(r"(turn on|toggle|turn off) (\d+),(\d+) through (\d+),(\d+)").unwrap();
     let mut lights = vec![vec![0; 1000]; 1000];
     for line in input.lines() {
@@ -348,7 +350,7 @@ pub fn solve_day_06_part_2(input: &str) -> Result<u64, String> {
     Ok(total_brightness)
 }
 
-pub fn solve_day_10_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_10_part_1(input: &str) -> AdventResult {
     let mut sequence = input.to_string();
     for _ in 0..40 {
         let mut new_sequence = Vec::new();
@@ -371,7 +373,7 @@ pub fn solve_day_10_part_1(input: &str) -> Result<u64, String> {
     Ok(sequence.len() as u64)
 }
 
-pub fn solve_day_12_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_12_part_1(input: &str) -> AdventResult {
     let mut sum = 0;
     let mut number = 0;
     let mut negative = false;
@@ -395,7 +397,7 @@ pub fn solve_day_12_part_1(input: &str) -> Result<u64, String> {
     Ok(sum as u64)
 }
 
-pub fn solve_day_25_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_25_part_1(input: &str) -> AdventResult {
     let re = Regex::new(r"row (\d+), column (\d+)").unwrap();
     let caps = re.captures(input).unwrap();
     let (row, column) = (

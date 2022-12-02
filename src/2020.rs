@@ -1,9 +1,9 @@
 use regex::Regex;
 
-use crate::util;
+use crate::util::{parse_u64, AdventResult};
 
-pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
-    let values = util::parse_u64(input);
+pub fn solve_day_01_part_1(input: &str) -> AdventResult {
+    let values = parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
             if a + b == 2020 {
@@ -14,8 +14,8 @@ pub fn solve_day_01_part_1(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
-    let values = util::parse_u64(input);
+pub fn solve_day_01_part_2(input: &str) -> AdventResult {
+    let values = parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
             for c in values.iter() {
@@ -28,7 +28,7 @@ pub fn solve_day_01_part_2(input: &str) -> Result<u64, String> {
     Err(String::from("Failed to find solution"))
 }
 
-pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_1(input: &str) -> AdventResult {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<lower>\d+)-(?P<upper>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -55,7 +55,7 @@ pub fn solve_day_02_part_1(input: &str) -> Result<u64, String> {
     Ok(valid_count)
 }
 
-pub fn solve_day_02_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_02_part_2(input: &str) -> AdventResult {
     let mut valid_count = 0;
     let re =
         Regex::new(r"(?P<pos1>\d+)-(?P<pos2>\d+) (?P<key>[a-z]): (?P<password>[a-z]+)").unwrap();
@@ -102,11 +102,11 @@ fn count_trees(trees: &[Vec<bool>], rise: u8, run: u8) -> u64 {
     num_trees
 }
 
-pub fn solve_day_03_part_1(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_1(input: &str) -> AdventResult {
     Ok(count_trees(&parse_trees(input), 1, 3))
 }
 
-pub fn solve_day_03_part_2(input: &str) -> Result<u64, String> {
+pub fn solve_day_03_part_2(input: &str) -> AdventResult {
     let trees = parse_trees(input);
     Ok(count_trees(&trees, 1, 1)
         * count_trees(&trees, 1, 3)
@@ -123,8 +123,8 @@ fn transform_subject_number(subject_number: u64, loop_size: u64) -> u64 {
     result
 }
 
-pub fn solve_day_25_part_1(input: &str) -> Result<u64, String> {
-    let public_keys = util::parse_u64(input);
+pub fn solve_day_25_part_1(input: &str) -> AdventResult {
+    let public_keys = parse_u64(input);
     let (card_pubkey, door_pubkey) = (public_keys[0], public_keys[1]);
 
     // try lots of loop sizes
@@ -157,7 +157,7 @@ pub fn solve_day_25_part_1(input: &str) -> Result<u64, String> {
 #[cfg(test)]
 mod test {
     use super::*;
-    use util::check_solution;
+    use crate::util::check_solution;
 
     const DAY_01_SAMPLE_INPUT: &str = "1721\n\
         979\n\
