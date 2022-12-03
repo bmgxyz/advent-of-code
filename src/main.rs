@@ -1,16 +1,16 @@
 use clap::{App, Arg};
 use std::fs;
 
-#[path = "2015.rs"]
+#[path = "2015/mod.rs"]
 mod solve_2015;
 
-#[path = "2020.rs"]
+#[path = "2020/mod.rs"]
 mod solve_2020;
 
-#[path = "2021.rs"]
+#[path = "2021/mod.rs"]
 mod solve_2021;
 
-#[path = "2022.rs"]
+#[path = "2022/mod.rs"]
 mod solve_2022;
 
 mod util;
@@ -80,20 +80,20 @@ fn main() -> Result<(), String> {
     // pass the puzzle input to the solution function
     let solution = match year {
         2015 => match (day, part) {
-            (1, 1) => solve_2015::solve_day_01_part_1(&input),
-            (1, 2) => solve_2015::solve_day_01_part_2(&input),
-            (2, 1) => solve_2015::solve_day_02_part_1(&input),
-            (2, 2) => solve_2015::solve_day_02_part_2(&input),
-            (3, 1) => solve_2015::solve_day_03_part_1(&input),
-            (3, 2) => solve_2015::solve_day_03_part_2(&input),
-            (4, 1) => solve_2015::solve_day_04_part_1(&input),
-            (4, 2) => solve_2015::solve_day_04_part_2(&input),
-            (5, 1) => solve_2015::solve_day_05_part_1(&input),
-            (6, 1) => solve_2015::solve_day_06_part_1(&input),
-            (6, 2) => solve_2015::solve_day_06_part_2(&input),
-            (10, 1) => solve_2015::solve_day_10_part_1(&input),
-            (12, 1) => solve_2015::solve_day_12_part_1(&input),
-            (25, 1) => solve_2015::solve_day_25_part_1(&input),
+            (1, 1) => solve_2015::day_01::part_1(&input),
+            (1, 2) => solve_2015::day_01::part_2(&input),
+            (2, 1) => solve_2015::day_02::part_1(&input),
+            (2, 2) => solve_2015::day_02::part_2(&input),
+            (3, 1) => solve_2015::day_03::part_1(&input),
+            (3, 2) => solve_2015::day_03::part_2(&input),
+            (4, 1) => solve_2015::day_04::part_1(&input),
+            (4, 2) => solve_2015::day_04::part_2(&input),
+            (5, 1) => solve_2015::day_05::part_1(&input),
+            (6, 1) => solve_2015::day_06::part_1(&input),
+            (6, 2) => solve_2015::day_06::part_2(&input),
+            (10, 1) => solve_2015::day_10::part_1(&input),
+            (12, 1) => solve_2015::day_12::part_1(&input),
+            (25, 1) => solve_2015::day_25::part_1(&input),
             (d, p) => not_solved_yet(2015, d, p),
         },
         2016 => not_solved_yet(2016, day, part),
@@ -101,37 +101,37 @@ fn main() -> Result<(), String> {
         2018 => not_solved_yet(2018, day, part),
         2019 => not_solved_yet(2019, day, part),
         2020 => match (day, part) {
-            (1, 1) => solve_2020::solve_day_01_part_1(&input),
-            (1, 2) => solve_2020::solve_day_01_part_2(&input),
-            (2, 1) => solve_2020::solve_day_02_part_1(&input),
-            (2, 2) => solve_2020::solve_day_02_part_2(&input),
-            (3, 1) => solve_2020::solve_day_03_part_1(&input),
-            (3, 2) => solve_2020::solve_day_03_part_2(&input),
-            (25, 1) => solve_2020::solve_day_25_part_1(&input),
+            (1, 1) => solve_2020::day_01::part_1(&input),
+            (1, 2) => solve_2020::day_01::part_2(&input),
+            (2, 1) => solve_2020::day_02::part_1(&input),
+            (2, 2) => solve_2020::day_02::part_2(&input),
+            (3, 1) => solve_2020::day_03::part_1(&input),
+            (3, 2) => solve_2020::day_03::part_2(&input),
+            (25, 1) => solve_2020::day_25::part_1(&input),
             (d, p) => not_solved_yet(2020, d, p),
         },
         2021 => match (day, part) {
-            (1, 1) => solve_2021::solve_day_01_part_1(&input),
-            (1, 2) => solve_2021::solve_day_01_part_2(&input),
-            (2, 1) => solve_2021::solve_day_02_part_1(&input),
-            (2, 2) => solve_2021::solve_day_02_part_2(&input),
-            (3, 1) => solve_2021::solve_day_03_part_1(&input),
-            (3, 2) => solve_2021::solve_day_03_part_2(&input),
-            (4, 1) => solve_2021::solve_day_04_part_1(&input),
-            (4, 2) => solve_2021::solve_day_04_part_2(&input),
-            (5, 1) => solve_2021::solve_day_05_part_1(&input),
-            (5, 2) => solve_2021::solve_day_05_part_2(&input),
-            (6, 1) => solve_2021::solve_day_06_part_1(&input),
-            (6, 2) => solve_2021::solve_day_06_part_2(&input),
+            (1, 1) => solve_2021::day_01::part_1(&input),
+            (1, 2) => solve_2021::day_01::part_2(&input),
+            (2, 1) => solve_2021::day_02::part_1(&input),
+            (2, 2) => solve_2021::day_02::part_2(&input),
+            (3, 1) => solve_2021::day_03::part_1(&input),
+            (3, 2) => solve_2021::day_03::part_2(&input),
+            (4, 1) => solve_2021::day_04::part_1(&input),
+            (4, 2) => solve_2021::day_04::part_2(&input),
+            (5, 1) => solve_2021::day_05::part_1(&input),
+            (5, 2) => solve_2021::day_05::part_2(&input),
+            (6, 1) => solve_2021::day_06::part_1(&input),
+            (6, 2) => solve_2021::day_06::part_2(&input),
             (d, p) => not_solved_yet(2021, d, p),
         },
         2022 => match (day, part) {
-            (1, 1) => solve_2022::solve_day_01_part_1(&input),
-            (1, 2) => solve_2022::solve_day_01_part_2(&input),
-            (2, 1) => solve_2022::solve_day_02_part_1(&input),
-            (2, 2) => solve_2022::solve_day_02_part_2(&input),
-            (3, 1) => solve_2022::solve_day_03_part_1(&input),
-            (3, 2) => solve_2022::solve_day_03_part_2(&input),
+            (1, 1) => solve_2022::day_01::part_1(&input),
+            (1, 2) => solve_2022::day_01::part_2(&input),
+            (2, 1) => solve_2022::day_02::part_1(&input),
+            (2, 2) => solve_2022::day_02::part_2(&input),
+            (3, 1) => solve_2022::day_03::part_1(&input),
+            (3, 2) => solve_2022::day_03::part_2(&input),
             (d, p) => not_solved_yet(2022, d, p),
         },
         _ => unreachable!(),
