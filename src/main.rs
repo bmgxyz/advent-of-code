@@ -4,6 +4,9 @@ use std::fs;
 #[path = "2015/mod.rs"]
 mod solve_2015;
 
+#[path = "2019/mod.rs"]
+mod solve_2019;
+
 #[path = "2020/mod.rs"]
 mod solve_2020;
 
