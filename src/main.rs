@@ -92,6 +92,7 @@ fn main() -> Result<(), String> {
             (4, 1) => solve_2015::day_04::part_1(&input),
             (4, 2) => solve_2015::day_04::part_2(&input),
             (5, 1) => solve_2015::day_05::part_1(&input),
+            (5, 2) => solve_2015::day_05::part_2(&input),
             (6, 1) => solve_2015::day_06::part_1(&input),
             (6, 2) => solve_2015::day_06::part_2(&input),
             (10, 1) => solve_2015::day_10::part_1(&input),
