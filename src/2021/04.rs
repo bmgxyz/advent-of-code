@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 type Board = Vec<Vec<(u8, bool)>>;
 
@@ -83,7 +83,7 @@ pub fn part_1(input: &str) -> AdventResult {
         for board in boards.iter_mut() {
             apply_new_number(*number, board);
             if is_winner(board) {
-                return Ok(compute_score(board, *number));
+                return Ok(AdventSolution::from(compute_score(board, *number)));
             }
         }
     }
@@ -99,7 +99,7 @@ pub fn part_2(input: &str) -> AdventResult {
             if is_winner(board) && !winning_boards[idx] {
                 winning_boards[idx] = true;
                 if winning_boards.iter().filter(|b| !**b).count() == 0 {
-                    return Ok(compute_score(board, *number));
+                    return Ok(AdventSolution::from(compute_score(board, *number)));
                 }
             }
         }

@@ -1,6 +1,6 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
-fn compute_item_priority(item: char) -> AdventResult {
+fn compute_item_priority(item: char) -> Result<u64, String> {
     if item.is_ascii_alphabetic() {
         match item {
             // Lowercase letters range in priority from 1 to 26, inclusive.
@@ -46,7 +46,7 @@ pub fn part_1(input: &str) -> AdventResult {
             ));
         }
     }
-    Ok(total_priority)
+    Ok(AdventSolution::from(total_priority))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -81,7 +81,7 @@ pub fn part_2(input: &str) -> AdventResult {
             ));
         }
     }
-    Ok(total_priority)
+    Ok(AdventSolution::from(total_priority))
 }
 
 #[cfg(test)]

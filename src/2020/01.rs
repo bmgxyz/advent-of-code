@@ -1,11 +1,11 @@
-use crate::util::{parse_u64, AdventResult};
+use crate::util::{parse_u64, AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let values = parse_u64(input);
     for a in values.iter() {
         for b in values.iter() {
             if a + b == 2020 {
-                return Ok(a * b);
+                return Ok(AdventSolution::from(a * b));
             }
         }
     }
@@ -18,7 +18,7 @@ pub fn part_2(input: &str) -> AdventResult {
         for b in values.iter() {
             for c in values.iter() {
                 if a + b + c == 2020 {
-                    return Ok(a * b * c);
+                    return Ok(AdventSolution::from(a * b * c));
                 }
             }
         }

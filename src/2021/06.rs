@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 fn simulate_lanternfish(input: &str, days: u16) -> u64 {
     let initial_lanternfish: Vec<u64> = input
@@ -26,11 +26,11 @@ fn simulate_lanternfish(input: &str, days: u16) -> u64 {
 }
 
 pub fn part_1(input: &str) -> AdventResult {
-    Ok(simulate_lanternfish(input, 80))
+    Ok(AdventSolution::from(simulate_lanternfish(input, 80)))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
-    Ok(simulate_lanternfish(input, 256))
+    Ok(AdventSolution::from(simulate_lanternfish(input, 256)))
 }
 
 #[cfg(test)]
@@ -46,6 +46,5 @@ fn test_part_1() {
 
 #[test]
 fn test_part_2() {
-    check_solution(&DAY_06_SAMPLE_INPUT, 26984457539, &part_2);
-    unimplemented!();
+    check_solution(&DAY_06_SAMPLE_INPUT, 26984457539_u64, &part_2);
 }

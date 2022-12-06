@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut valid_count = 0;
@@ -26,7 +26,7 @@ pub fn part_1(input: &str) -> AdventResult {
             valid_count += 1;
         }
     }
-    Ok(valid_count)
+    Ok(AdventSolution::from(valid_count))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -52,7 +52,7 @@ pub fn part_2(input: &str) -> AdventResult {
             valid_count += 1;
         }
     }
-    Ok(valid_count)
+    Ok(AdventSolution::from(valid_count))
 }
 
 #[cfg(test)]

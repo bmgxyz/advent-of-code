@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 fn parse_day_05_input(input: &str) -> Vec<(u16, u16, u16, u16)> {
     let re = Regex::new(r"(?P<x1>\d+),(?P<y1>\d+) -> (?P<x2>\d+),(?P<y2>\d+)").unwrap();
@@ -43,7 +43,9 @@ pub fn part_1(input: &str) -> AdventResult {
             }
         }
     }
-    Ok(visited.values().filter(|v| v >= &&2).count() as u64)
+    Ok(AdventSolution::from(
+        visited.values().filter(|v| v >= &&2).count(),
+    ))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -75,7 +77,9 @@ pub fn part_2(input: &str) -> AdventResult {
             increment_visited(&mut visited, (x, y));
         }
     }
-    Ok(visited.values().filter(|v| v >= &&2).count() as u64)
+    Ok(AdventSolution::from(
+        visited.values().filter(|v| v >= &&2).count(),
+    ))
 }
 
 #[cfg(test)]

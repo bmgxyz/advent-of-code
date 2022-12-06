@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let re = Regex::new(r"row (\d+), column (\d+)").unwrap();
@@ -15,14 +15,14 @@ pub fn part_1(input: &str) -> AdventResult {
         num_iterations -= 16_777_196;
     }
 
-    let mut code = 20_151_125;
+    let mut code = 20_151_125_u64;
     let m = 252_533;
     let n = 33_554_393;
     for _ in 0..num_iterations {
         code = (code * m) % n;
     }
 
-    Ok(code)
+    Ok(AdventSolution::from(code))
 }
 
 #[cfg(test)]

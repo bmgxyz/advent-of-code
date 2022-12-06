@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 struct ElfPair {
     first_start: u64,
@@ -51,12 +51,16 @@ fn parse_elf_pairs(pairs: &str) -> Result<Vec<ElfPair>, String> {
 
 pub fn part_1(input: &str) -> AdventResult {
     let pairs = parse_elf_pairs(input)?;
-    Ok(pairs.iter().filter(|p| p.is_complete_overlap()).count() as u64)
+    Ok(AdventSolution::from(
+        pairs.iter().filter(|p| p.is_complete_overlap()).count(),
+    ))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
     let pairs = parse_elf_pairs(input)?;
-    Ok(pairs.iter().filter(|p| p.is_partial_overlap()).count() as u64)
+    Ok(AdventSolution::from(
+        pairs.iter().filter(|p| p.is_partial_overlap()).count(),
+    ))
 }
 
 #[cfg(test)]

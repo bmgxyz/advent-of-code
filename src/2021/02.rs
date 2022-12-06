@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut horizontal_position = 0;
@@ -15,7 +15,7 @@ pub fn part_1(input: &str) -> AdventResult {
             _ => unreachable!(),
         };
     }
-    Ok(horizontal_position * depth)
+    Ok(AdventSolution::from(horizontal_position * depth))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -37,7 +37,7 @@ pub fn part_2(input: &str) -> AdventResult {
             _ => unreachable!(),
         };
     }
-    Ok(horizontal_position * depth)
+    Ok(AdventSolution::from(horizontal_position * depth))
 }
 
 #[cfg(test)]

@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut nice_count = 0;
@@ -27,7 +27,7 @@ pub fn part_1(input: &str) -> AdventResult {
             prev_chr = chr;
         }
     }
-    Ok(nice_count)
+    Ok(AdventSolution::from(nice_count))
 }
 
 #[cfg(test)]

@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let length = input.lines().next().unwrap().len();
@@ -24,7 +24,7 @@ pub fn part_1(input: &str) -> AdventResult {
         }
         (gamma_rate, epsilon_rate)
     };
-    Ok(gamma_rate * epsilon_rate)
+    Ok(AdventSolution::from(gamma_rate * epsilon_rate))
 }
 
 enum Gas {
@@ -76,8 +76,10 @@ pub fn part_2(input: &str) -> AdventResult {
     let remaining_numbers: Vec<&str> = input.lines().collect();
     let oxygen_rating = filter_numbers(&remaining_numbers, Gas::Oxygen);
     let carbon_dioxide_rating = filter_numbers(&remaining_numbers, Gas::CarbonDioxide);
-    Ok(u64::from_str_radix(&oxygen_rating, 2).unwrap()
-        * u64::from_str_radix(&carbon_dioxide_rating, 2).unwrap())
+    Ok(AdventSolution::from(
+        u64::from_str_radix(&oxygen_rating, 2).unwrap()
+            * u64::from_str_radix(&carbon_dioxide_rating, 2).unwrap(),
+    ))
 }
 
 #[cfg(test)]

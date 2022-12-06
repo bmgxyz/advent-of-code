@@ -1,4 +1,4 @@
-use crate::util::{parse_u64, AdventResult};
+use crate::util::{parse_u64, AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let depths = parse_u64(input);
@@ -16,7 +16,7 @@ pub fn part_1(input: &str) -> AdventResult {
         }
         last_depth = *depth;
     }
-    Ok(increase_count)
+    Ok(AdventSolution::from(increase_count))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -37,7 +37,7 @@ pub fn part_2(input: &str) -> AdventResult {
         }
         last_measurement = new_measurement;
     }
-    Ok(increase_count)
+    Ok(AdventSolution::from(increase_count))
 }
 
 #[cfg(test)]

@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut position = (0, 0);
@@ -14,7 +14,7 @@ pub fn part_1(input: &str) -> AdventResult {
         };
         visited.insert(position);
     }
-    Ok(visited.len() as u64)
+    Ok(AdventSolution::from(visited.len()))
 }
 
 enum Actor {
@@ -49,7 +49,7 @@ pub fn part_2(input: &str) -> AdventResult {
         };
         visited.insert(*position);
     }
-    Ok(visited.len() as u64)
+    Ok(AdventSolution::from(visited.len()))
 }
 
 #[cfg(test)]

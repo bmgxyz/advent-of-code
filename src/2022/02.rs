@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 #[derive(Clone, Copy)]
 enum RpsChoice {
@@ -50,7 +50,7 @@ pub fn part_1(input: &str) -> AdventResult {
             guide.push((their_move, our_move));
         }
     }
-    Ok(compute_rps_score(guide))
+    Ok(AdventSolution::from(compute_rps_score(guide)))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -83,7 +83,7 @@ pub fn part_2(input: &str) -> AdventResult {
             guide.push((their_move, our_move));
         }
     }
-    Ok(compute_rps_score(guide))
+    Ok(AdventSolution::from(compute_rps_score(guide)))
 }
 
 #[cfg(test)]

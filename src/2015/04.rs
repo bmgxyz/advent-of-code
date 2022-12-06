@@ -1,6 +1,6 @@
 use std::num::Wrapping;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 /// MD5 implementation that only works for messages that are less than about 56 bytes long.
 fn md5_short(message: &[u8]) -> u128 {
@@ -92,7 +92,7 @@ pub fn part_1(input: &str) -> AdventResult {
     while md5_short(&concat_message(original_message, number)) >> 108 != 0 {
         number += 1;
     }
-    Ok(number)
+    Ok(AdventSolution::from(number))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -102,7 +102,7 @@ pub fn part_2(input: &str) -> AdventResult {
     while md5_short(&concat_message(original_message, number)) >> 104 != 0 {
         number += 1;
     }
-    Ok(number)
+    Ok(AdventSolution::from(number))
 }
 
 #[cfg(test)]
@@ -131,6 +131,8 @@ fn test_part_1() {
 }
 
 #[test]
+#[ignore]
 fn test_part_2() {
-    unimplemented!()
+    check_solution("abcdef", 6742839, &part_2);
+    check_solution("pqrstuv", 5714438, &part_2);
 }

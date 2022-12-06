@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut sequence = input.to_string();
@@ -20,7 +20,7 @@ pub fn part_1(input: &str) -> AdventResult {
         new_sequence.push(digit.to_string());
         sequence = new_sequence.iter().fold(String::new(), |acc, s| acc + s);
     }
-    Ok(sequence.len() as u64)
+    Ok(AdventSolution::from(sequence.len()))
 }
 
 #[cfg(test)]

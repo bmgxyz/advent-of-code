@@ -1,7 +1,7 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
-    let mut floor: i64 = 0;
+    let mut floor = 0;
     for ch in input.chars() {
         if ch == '(' {
             floor += 1;
@@ -9,7 +9,7 @@ pub fn part_1(input: &str) -> AdventResult {
             floor -= 1;
         }
     }
-    Ok(floor as u64)
+    Ok(AdventSolution::from(floor))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -21,7 +21,7 @@ pub fn part_2(input: &str) -> AdventResult {
             floor -= 1;
         }
         if floor < 0 {
-            return Ok((idx as u64) + 1);
+            return Ok(AdventSolution::from(idx + 1));
         }
     }
     Err(String::from("Failed to find the basement"))

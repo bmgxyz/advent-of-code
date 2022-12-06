@@ -1,6 +1,6 @@
 use std::collections::VecDeque;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 fn find_start_packet(input: &str, length: usize) -> AdventResult {
     let mut is_start_packet;
@@ -16,7 +16,7 @@ fn find_start_packet(input: &str, length: usize) -> AdventResult {
             }
         }
         if is_start_packet {
-            return Ok((idx + 1) as u64);
+            return Ok(AdventSolution::from(idx + 1));
         }
     }
     Err("Failed to find start packet".to_string())

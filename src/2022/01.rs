@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 fn parse_elf_calories(input: &str) -> Result<Vec<u64>, String> {
     let mut elf_calories = Vec::new();
@@ -24,7 +24,7 @@ fn parse_elf_calories(input: &str) -> Result<Vec<u64>, String> {
 pub fn part_1(input: &str) -> AdventResult {
     let elf_calories = parse_elf_calories(input)?;
     match elf_calories.iter().max() {
-        Some(m) => Ok(*m),
+        Some(m) => Ok(AdventSolution::from(*m)),
         None => Err("No calories found".to_string()),
     }
 }
@@ -33,7 +33,9 @@ pub fn part_2(input: &str) -> AdventResult {
     let mut elf_calories = parse_elf_calories(input)?;
     elf_calories.sort();
     if elf_calories.len() >= 3 {
-        Ok(elf_calories.iter().rev().take(3).sum())
+        Ok(AdventSolution::from(
+            elf_calories.iter().rev().take(3).sum::<u64>(),
+        ))
     } else {
         Err("Not enough elves".to_string())
     }

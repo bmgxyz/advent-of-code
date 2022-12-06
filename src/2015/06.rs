@@ -1,6 +1,6 @@
 use regex::Regex;
 
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let re = Regex::new(r"(turn on|toggle|turn off) (\d+),(\d+) through (\d+),(\d+)").unwrap();
@@ -50,7 +50,7 @@ pub fn part_1(input: &str) -> AdventResult {
             }
         }
     }
-    Ok(enabled_lights)
+    Ok(AdventSolution::from(enabled_lights))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -101,7 +101,7 @@ pub fn part_2(input: &str) -> AdventResult {
             total_brightness += brightness
         }
     }
-    Ok(total_brightness)
+    Ok(AdventSolution::from(total_brightness))
 }
 
 #[cfg(test)]

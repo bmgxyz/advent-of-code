@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 fn parse_day_02_input(input: &str) -> Vec<Vec<u64>> {
     input
@@ -19,7 +19,7 @@ pub fn part_1(input: &str) -> AdventResult {
         paper_total +=
             2 * dim[0] * dim[1] + 2 * dim[1] * dim[2] + 2 * dim[2] * dim[0] + dim[0] * dim[1];
     }
-    Ok(paper_total)
+    Ok(AdventSolution::from(paper_total))
 }
 
 pub fn part_2(input: &str) -> AdventResult {
@@ -29,7 +29,7 @@ pub fn part_2(input: &str) -> AdventResult {
         dim.sort_unstable();
         ribbon_total += 2 * dim[0] + 2 * dim[1] + dim[0] * dim[1] * dim[2];
     }
-    Ok(ribbon_total)
+    Ok(AdventSolution::from(ribbon_total))
 }
 
 #[cfg(test)]

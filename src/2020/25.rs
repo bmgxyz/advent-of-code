@@ -1,4 +1,4 @@
-use crate::util::{parse_u64, AdventResult};
+use crate::util::{parse_u64, AdventResult, AdventSolution};
 
 fn transform_subject_number(subject_number: u64, loop_size: u64) -> u64 {
     let mut result = 1;
@@ -36,7 +36,7 @@ pub fn part_1(input: &str) -> AdventResult {
         transform_subject_number(door_pubkey, card_loop_size.unwrap()),
         encryption_key
     );
-    Ok(encryption_key)
+    Ok(AdventSolution::from(encryption_key))
 }
 
 #[cfg(test)]

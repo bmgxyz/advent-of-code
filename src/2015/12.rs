@@ -1,4 +1,4 @@
-use crate::util::AdventResult;
+use crate::util::{AdventResult, AdventSolution};
 
 pub fn part_1(input: &str) -> AdventResult {
     let mut sum = 0;
@@ -20,8 +20,7 @@ pub fn part_1(input: &str) -> AdventResult {
             negative = false;
         }
     }
-    // Cast as u64 here because we can assume the result will be positive.
-    Ok(sum as u64)
+    Ok(AdventSolution::from(sum))
 }
 
 #[cfg(test)]
