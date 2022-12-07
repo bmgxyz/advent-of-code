@@ -15,3 +15,6 @@ pub mod day_05;
 
 #[path = "06.rs"]
 pub mod day_06;
+
+#[path = "07.rs"]
+pub mod day_07;
